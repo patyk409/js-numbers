@@ -1,30 +1,33 @@
-// creates and positions button
-const btn = document.createElement('button')
+// create a main container
+const container = document.createElement('div')
+document.body.prepend(container)
+
+const createElement = (parentElement, elementType, attr, attrVal) => {
+  const elementName = document.createElement(elementType)
+  elementName.setAttribute(attr, attrVal)
+  parentElement.appendChild(elementName)
+}
+
+// create button
+createElement(container, 'button', 'class', 'btn')
+const btn = document.querySelector('.btn')
 btn.innerText = 'Generate Random Numbers'
-btn.style.display = 'block'
-btn.style.margin = '0 auto'
-document.body.appendChild(btn)
 
-// creates and positions table of numbers
-const table = document.createElement('div')
-table.style.width = '100%'
-table.style.display = 'flex'
-table.style.justifyContent = 'space-around'
-document.body.appendChild(table)
+// create table of numbers
+createElement(container, 'div', 'class', 'table')
 
-// creates a odd numbers column
-const oddColumn = document.createElement('div')
-const oddTitle = document.createElement('p')
-oddColumn.appendChild(oddTitle)
-oddTitle.innerText = 'Odd Column'
-table.appendChild(oddColumn)
+// create odd and even column
+createElement(document.querySelector('.table'), 'div', 'class', 'odd-column')
+createElement(document.querySelector('.table'), 'div', 'class', 'even-column')
 
-// creates a even numbers column
-const evenColumn = document.createElement('div')
-const evenTitle = document.createElement('p')
-evenColumn.appendChild(evenTitle)
-evenTitle.innerText = 'Even Column'
-table.appendChild(evenColumn)
+// create odd and even title
+createElement(document.querySelector('.odd-column'), 'p', 'class', 'odd-title')
+const oddColumn = document.querySelector('.odd-column')
+oddColumn.innerHTML = '<p>Odd Column</p>'
+
+createElement(document.querySelector('.even-column'), 'p', 'class', 'even-title')
+const evenColumn = document.querySelector('.even-column')
+evenColumn.innerHTML = '<p>Even Column</p>'
 
 // compares numbers passed to function as a parameters
 const compareNumbers = (num1, num2) => {
@@ -32,13 +35,14 @@ const compareNumbers = (num1, num2) => {
 }
 
 // generates amount of random numbers, sorts into odd and even and passes them to the proper columns
-const generateRandomNumbers = () => {
+const generateAndSortNumbers = () => {
   const min = 1
   const max = 100
   const amount = 20
   const oddArr = []
   const evenArr = []
 
+  // clear columns before next generating
   oddColumn.innerHTML = '<p>Odd Column</p>'
   evenColumn.innerHTML = '<p>Even Column</p>'
 
@@ -56,20 +60,18 @@ const generateRandomNumbers = () => {
   }
 
   // passes sorted numbers to proper column
-  oddArr.forEach(el => {
+  oddArr.forEach((el) => {
     const oddNum = document.createElement('p')
-    oddNum.style.textAlign = 'center'
-    oddColumn.appendChild(oddNum)
+    document.querySelector('.odd-column').appendChild(oddNum)
     oddNum.innerText = el
   })
 
   // passes sorted numbers to proper column
-  evenArr.forEach(el => {
+  evenArr.forEach((el) => {
     const evenNum = document.createElement('p')
-    evenNum.style.textAlign = 'center'
-    evenColumn.appendChild(evenNum)
+    document.querySelector('.even-column').appendChild(evenNum)
     evenNum.innerText = el
   })
 }
 
-btn.addEventListener('click', generateRandomNumbers)
+btn.addEventListener('click', generateAndSortNumbers)
