@@ -2,6 +2,7 @@
 const container = document.createElement('div')
 document.body.prepend(container)
 
+// function that creates all elements dynamically
 const createElement = (parentElement, elementType, attr, attrVal) => {
   const elementName = document.createElement(elementType)
   elementName.setAttribute(attr, attrVal)
@@ -34,7 +35,7 @@ const compareNumbers = (num1, num2) => {
   return num1 - num2
 }
 
-// generates amount of random numbers, sorts into odd and even and passes them to the proper columns
+// generates amount of random numbers, sorts into odd/even and passes them to the proper columns
 const generateAndSortNumbers = () => {
   const min = 1
   const max = 100
@@ -46,7 +47,7 @@ const generateAndSortNumbers = () => {
   oddColumn.innerHTML = '<p>Odd Column</p>'
   evenColumn.innerHTML = '<p>Even Column</p>'
 
-  // loop that generates random numbers and sorts them
+  // loop that generates random numbers and sorts them into odd/even
   for (let i = 0; i < amount; i++) {
     let randomNum = Math.floor(Math.random() * (max - min + 1) + min)
 
